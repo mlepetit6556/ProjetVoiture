@@ -68,6 +68,13 @@ plt.show()
 fig = px.scatter_matrix(car_data) #On regarde si les données de la base sont corrélées
 fig.show()
 
+#On définit une fonction pour calculer l'erreur de chaque régression linéaire
+def erreur_RL(pred, y):
+    erreur=0
+    for i in range(len(pred)):
+        erreur+=(y[i]-pred[i])**2
+    return(erreur)
+
 #Régression linéaire avec librairie Numpy
 
 x=car_data['Year']
@@ -82,6 +89,8 @@ plt.plot(x, pred, c='red')
 plt.title('Régression linéaire obtenue avec Numpy')
 plt.show()
 
+print('Erreur Numpy', erreur_RL(pred, y))
+
 #Régression linéaire avec librairie Scipy
 
 slope, intercept, r_value, p_value, std_err = stats.linregress(car_data.Year, car_data.Selling_Price)
@@ -92,6 +101,8 @@ plt.plot(car_data.Year, car_data.Selling_Price,'o')
 plt.plot(car_data.Year, fitLine, c='r')
 plt.title('Regression linéaire obtenue avec Scipy')
 plt.show()
+
+print('Erreur Scipy', erreur_RL(fitLine, car_data.Selling_Price))
 
 #Régression linéaire avec librairie slkearn
 
@@ -108,6 +119,8 @@ plt.plot(x, y, 'o')
 plt.title('Régression linéaire obtenue avec sklearn')
 plt.show()
 
+print('Erreur sklearn', erreur_RL(model.predict(x), y))
+
 #Régression linéaire avec plusieurs variables d'entrée avec librairie sklearn
 
 model=sklearn.linear_model.LinearRegression()
@@ -118,7 +131,7 @@ x=[[years[i], kms[i]] for i in range(len(years))]
 y=car_data['Selling_Price']
 
 model.fit(x, y)
-print(model.score(x,y))
+print('Erreur plusieurs variables', erreur_RL(model.predict(x), y))
 
 ##QUESTION 6 : Création de ma propre classe LinearRegression
 
@@ -157,6 +170,7 @@ plt.plot(x, y, 'o')
 plt.title('Régression linéaire obtenue avec ma classe')
 plt.show()
 
+print('Erreur Mon Modèle', erreur_RL(preds, y))
 
 ##QUESTION 7 : Régression linéaire  avec SVM
 
@@ -168,9 +182,11 @@ model=SVR(kernel='linear')
 model.fit(x, y)
 preds=model.predict(x)
 
+fig1 = plt.figure('Michel')
 plt.plot(x, y, 'o')
 plt.plot(x, preds, c='red')
 plt.title('Régression linéaire obtenue avec SVR')
 
 plt.show()
 
+print('Erreur SVR', erreur_RL(preds, y))
