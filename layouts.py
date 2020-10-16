@@ -76,8 +76,8 @@ def layout(data, question):
             html.P("\n"),
             html.P("\n"),
             html.P(id="prix"),
-            html.H6("Dans le cadre de notre modèle multivarié, ce calculateur permet donc à l'utilisateur de déterminer le juste prix d'un véhicule donné.")
-
+            html.H6("Dans le cadre de notre modèle multivarié, ce calculateur permet donc à l'utilisateur de déterminer le juste prix d'un véhicule donné."),
+            html.P("Ce calculateur a des limites car on remarque que plus le nombre de kilomètres est important, plus le prix est élevé ce qui est bien sûr contraire à la réalité.")
         ])
     elif question ==5:
         layout = html.Div([
@@ -93,7 +93,8 @@ def layout(data, question):
             html.P("Étudions maitenant les limites de nos modèles monovarié et multivarié."),
             html.P("Il peut arriver qu'en utilisant notre modèle, une personne trouve votre voiture au meilleur prix mais que 3 jours plus tard, cette dernière tombe en panne."),
             html.H6("Quelles données manquaient-t-ils à l'acheteur pour prédire cette panne ?"),
-            html.P("En considérant seulement l'année de fabrication du véhicule et le nombre de kilomètres parcourus par le véhicule, on ne peux pas déterminer réellement son état. En effet, un véhicule peut être récent et avoir peu de kilomètres au compteur mais avoir eu un accident : il ne sera donc pas en bon état. Au contraire, un véhicule ancien, ayant autant de kilomètres peut avoir été entretenu régulièrement par son propriétaire et être donc en meilleur état. ")
+            html.P("En considérant seulement l'année de fabrication du véhicule et le nombre de kilomètres parcourus par le véhicule, on ne peux pas déterminer réellement son état. En effet, un véhicule peut être récent et avoir peu de kilomètres au compteur mais avoir eu un accident : il ne sera donc pas en bon état. Au contraire, un véhicule ancien, ayant autant de kilomètres peut avoir été entretenu régulièrement par son propriétaire et être donc en meilleur état. "),
+            html.P("Il faudrait donc mettre en place un système de notation de l'état des véhicules pour remédier à ce problème.")
         ])
 
     return(layout)
